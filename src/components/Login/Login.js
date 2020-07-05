@@ -2,6 +2,8 @@ import React from 'react';
 import './Login.scss';
 import InputField from './inputField';
 
+import $ from 'jquery';
+
 function Login() {
   const inputRefs = React.useRef(
    [React.createRef(), React.createRef()]
@@ -22,6 +24,7 @@ function Login() {
 
        for (let i=0; i<inputRefs.current.length; i++){
          const valid = inputRefs.current[i].current.validate()
+
          if(!valid){
            isValid = false
            
@@ -30,6 +33,30 @@ function Login() {
        if(!isValid){
          return
        }
+      
+      $.ajax({
+        type: "post",
+        url: "http://localhost:3001/auth" ,
+        dataType : "json",
+        contentType : "application/json", 
+        data: JSON.stringify(data),
+        success: function (res) {
+          if(res.status === 0)
+          {
+              //验证通过
+              console.log(res.token)
+
+              //先保存获取到的token到本地浏览器 如cookie或localStorage 
+
+              //跳转到后台首页
+              window.location = '/admin'
+          }
+          else
+          {
+              alert(res.message)
+          }
+        }
+      }) 
   }
   return (
     
