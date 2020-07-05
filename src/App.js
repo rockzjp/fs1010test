@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Nav from './components/Nav';
 import Home from './components/Home/Home';
+import Admin from './components/Admin/Admin';
 import Contact from './components/Contact/Contact';
 import About from './components/About/About';
 import Blog from './components/Blog/Blog'; 
@@ -20,6 +21,7 @@ function App() {
               <Route path="/blog" component={Blog} />
               <Route path="/contact" component={Contact} />
               <Route path="/login" component={Login} />
+              <Route path="/admin" component={Admin} />
           </Switch>
           <Footer />
         </div>
